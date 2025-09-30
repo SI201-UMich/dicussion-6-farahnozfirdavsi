@@ -106,6 +106,14 @@ class PollReader():
             tuple: A tuple containing the average polling percentages for Harris and Trump
                    among likely voters, in that order.
         """
+        harris_values = self.data_dict['Harris result']
+        trump_values = self.data_dict['Trump result']
+
+        avg_harris = sum(harris_values) / len(harris_values) if harris_values else 0
+        avg_trump = sum(trump_values) / len(trump_values) if trump_values else 0
+
+        return avg_harris, avg_trump
+
         pass
 
 
