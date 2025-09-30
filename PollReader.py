@@ -53,18 +53,24 @@ class PollReader():
         Remember that the first row of a CSV contains all of the column names,
         and each value in a CSV is seperated by a comma.
         """
+        self.data_dict = {
+            'month': [],
+            'date': [],
+            'sample': [],
+            'Harris result': [],
+            'Trump result': []
+        }
 
         # iterate through each row of the data
-        for i in self.raw_data:
-
+        for row in self.raw_data[1:]:
             # split up the row by column
-            seperated = i.split(' ')
-
+            seperated = row.split(',')
+            if len(seperated) < 5:
+                continue
             # map each part of the row to the correct column
             self.data_dict['month'].append(seperated[0])
             self.data_dict['date'].append(int(seperated[1]))
-            self.data_dict['sample'].append(int(seperated[2]))
-            self.data_dict['sample type'].append(seperated[2])
+            self.data_dict['sample'].append(str(seperated[2]))
             self.data_dict['Harris result'].append(float(seperated[3]))
             self.data_dict['Trump result'].append(float(seperated[4]))
 
